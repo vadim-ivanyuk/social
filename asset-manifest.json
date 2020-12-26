@@ -1,25 +1,27 @@
 {
   "files": {
-    "main.css": "/firebase-app/static/css/main.ea1455b2.chunk.css",
-    "main.js": "/firebase-app/static/js/main.5c8b663f.chunk.js",
-    "main.js.map": "/firebase-app/static/js/main.5c8b663f.chunk.js.map",
-    "runtime-main.js": "/firebase-app/static/js/runtime-main.748b9465.js",
-    "runtime-main.js.map": "/firebase-app/static/js/runtime-main.748b9465.js.map",
-    "static/css/2.20aa2d7b.chunk.css": "/firebase-app/static/css/2.20aa2d7b.chunk.css",
-    "static/js/2.c69dc90d.chunk.js": "/firebase-app/static/js/2.c69dc90d.chunk.js",
-    "static/js/2.c69dc90d.chunk.js.map": "/firebase-app/static/js/2.c69dc90d.chunk.js.map",
-    "static/js/3.d09ef29a.chunk.js": "/firebase-app/static/js/3.d09ef29a.chunk.js",
-    "static/js/3.d09ef29a.chunk.js.map": "/firebase-app/static/js/3.d09ef29a.chunk.js.map",
-    "index.html": "/firebase-app/index.html",
-    "static/css/2.20aa2d7b.chunk.css.map": "/firebase-app/static/css/2.20aa2d7b.chunk.css.map",
-    "static/css/main.ea1455b2.chunk.css.map": "/firebase-app/static/css/main.ea1455b2.chunk.css.map",
-    "static/js/2.c69dc90d.chunk.js.LICENSE.txt": "/firebase-app/static/js/2.c69dc90d.chunk.js.LICENSE.txt"
+    "main.css": "/social/static/css/main.5b4ba887.chunk.css",
+    "main.js": "/social/static/js/main.dcac7086.chunk.js",
+    "main.js.map": "/social/static/js/main.dcac7086.chunk.js.map",
+    "runtime-main.js": "/social/static/js/runtime-main.7d2c069a.js",
+    "runtime-main.js.map": "/social/static/js/runtime-main.7d2c069a.js.map",
+    "static/css/2.20aa2d7b.chunk.css": "/social/static/css/2.20aa2d7b.chunk.css",
+    "static/js/2.df170dd0.chunk.js": "/social/static/js/2.df170dd0.chunk.js",
+    "static/js/2.df170dd0.chunk.js.map": "/social/static/js/2.df170dd0.chunk.js.map",
+    "static/js/3.7089328a.chunk.js": "/social/static/js/3.7089328a.chunk.js",
+    "static/js/3.7089328a.chunk.js.map": "/social/static/js/3.7089328a.chunk.js.map",
+    "index.html": "/social/index.html",
+    "static/css/2.20aa2d7b.chunk.css.map": "/social/static/css/2.20aa2d7b.chunk.css.map",
+    "static/css/main.5b4ba887.chunk.css.map": "/social/static/css/main.5b4ba887.chunk.css.map",
+    "static/js/2.df170dd0.chunk.js.LICENSE.txt": "/social/static/js/2.df170dd0.chunk.js.LICENSE.txt",
+    "static/media/fon.262e2258.jpg": "/social/static/media/fon.262e2258.jpg",
+    "static/media/social.11e8adbd.svg": "/social/static/media/social.11e8adbd.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.748b9465.js",
+    "static/js/runtime-main.7d2c069a.js",
     "static/css/2.20aa2d7b.chunk.css",
-    "static/js/2.c69dc90d.chunk.js",
-    "static/css/main.ea1455b2.chunk.css",
-    "static/js/main.5c8b663f.chunk.js"
+    "static/js/2.df170dd0.chunk.js",
+    "static/css/main.5b4ba887.chunk.css",
+    "static/js/main.dcac7086.chunk.js"
   ]
 }
