@@ -2,8 +2,8 @@ import React from "react";
 import firebase from "firebase/app";
 import "firebase/database";
 import "firebase/auth";
-import { cookies } from "../../../utils/cookies";
-import { withFirebaseDb } from "../../../hoc/withFirebaseDb.jsx";
+import { cookies } from "../../../../utils/cookies";
+import { withFirebaseDb } from "../../../../hoc/withFirebaseDb.jsx";
 
 const firebaseDb = firebase.database();
 

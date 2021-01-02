@@ -23,8 +23,8 @@ const User = (props) => {
   return (
     <>
       <div id="UserModal" className="cursor-pointer" onClick={handleClick}>
-        <span className="mr-2">Зраствуйте {user.name}</span>
         <img src={user.avatar} className="user-img" alt="" />
+        <span className="ml-2">Зраствуйте {user.name}</span>
       </div>
       <Popover
         id="UserModal"
