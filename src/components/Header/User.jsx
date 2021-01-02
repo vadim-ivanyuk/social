@@ -1,53 +1,59 @@
-import React from "react";
-import { Popover, PopoverBody } from "reactstrap";
+import React, { useState } from "react";
+import Popover from "@material-ui/core/Popover";
+import Typography from "@material-ui/core/Typography";
 import { withAuth } from "../../hoc/withAuth.jsx";
 
-class User extends React.Component {
-  constructor(props) {
-    super(props);
+const User = (props) => {
+  const [showUserModal, toggleUserModal] = useState(null);
 
-    this.state = {
-      popoverOpen: false,
-    };
-  }
-
-  toggle = () => {
-    this.setState((prevState) => ({ popoverOpen: !prevState.popoverOpen }));
+  const handleClick = (event) => {
+    toggleUserModal(event.currentTarget);
   };
 
-  onLogOut = () => {
-    const { authActions } = this.props;
-    authActions.onLogOut();
+  const handleClose = () => {
+    toggleUserModal(null);
   };
 
-  render() {
-    const { auth } = this.props;
-    const { popoverOpen } = this.state;
+  const open = Boolean(showUserModal);
 
-    return (
-      <>
-        <div id="Popover1" className="cursor-pointer">
-          Здраствуйте {auth.user.name}
-        </div>
-        {/* <Popover
-          placement="bottom"
-          isOpen={popoverOpen}
-          target="Popover1"
-          toggle={this.toggle}
+  const {
+    auth: { user },
+    authActions,
+  } = props;
+  return (
+    <>
+      <div id="UserModal" className="cursor-pointer" onClick={handleClick}>
+        <span className="mr-2">Зраствуйте {user.name}</span>
+        <img src={user.avatar} className="user-img" alt="" />
+      </div>
+      <Popover
+        id="UserModal"
+        open={open}
+        anchorEl={showUserModal}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+        className="user-modal"
+      >
+        <Typography className="user-modal__name">
+          {user.name}{" "}
+          <span className="user-modal__subname">Смотреть профиль</span>
+        </Typography>
+        <Typography
+          onClick={() => authActions.onLogOut()}
+          className="user-modal__log-out"
         >
-          <PopoverBody className="user-modal d-flex align-items-center">
-            <button
-              type="button"
-              className="btn btn-secondary w-100"
-              onClick={this.onLogOut}
-            >
-              Выйти
-            </button>
-          </PopoverBody>
-        </Popover> */}
-      </>
-    );
-  }
-}
+          Выйти
+        </Typography>
+      </Popover>
+    </>
+  );
+};
 
 export default withAuth(User);

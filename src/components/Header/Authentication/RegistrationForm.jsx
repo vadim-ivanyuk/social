@@ -16,6 +16,7 @@ class RegistrationForm extends React.Component {
         email: "",
         password: "",
         name: "",
+        avatar: null,
       },
       errors: {},
       firebaseError: "",
@@ -37,9 +38,24 @@ class RegistrationForm extends React.Component {
     }));
   };
 
+  handleChangeAvatar = (e) => {
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      this.setState((prevState) => ({
+        user: {
+          ...prevState.user,
+          avatar: e.target.result,
+        },
+      }));
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
   validateFields = () => {
     const errors = {};
-    const { email, password, name } = this.state.user;
+    const { email, password, name, avatar } = this.state.user;
 
     if (email.length < 5) {
       errors.email = "Укажите логин, в формате primer@gmail.com";
@@ -49,6 +65,9 @@ class RegistrationForm extends React.Component {
     }
     if (name.length < 5) {
       errors.name = "Укажите имя, минимум 5 значений";
+    }
+    if (avatar === null) {
+      errors.avatar = "Выберите аватар";
     }
 
     return errors;
@@ -90,10 +109,10 @@ class RegistrationForm extends React.Component {
       .then((data) => {
         authActions.toggleRegistrationForm(false);
         authActions.updateUser(user);
+        console.log(user.avatar);
         firebaseDb
           .ref("users")
           .child(data.user.uid)
-          .child("user")
           .set({ ...user });
         cookies.set("user_id", data.user.uid, {
           path: "/",
@@ -114,6 +133,20 @@ class RegistrationForm extends React.Component {
       <div className="w-100 d-flex justify-content-center align-items-center">
         <form className="col-11 registration-form" onSubmit={this.onSubmit}>
           <h3 className="text-center mb-2 mt-2 form-title">Регистрация</h3>
+          <div className="form-group">
+            <label htmlFor="name">Имя:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="name"
+              id="name"
+              value={user.name}
+              placeholder="Укажите свое имя"
+              onChange={this.handleChange}
+              onBlur={this.handleBlur}
+            />
+            <p className="text-danger error-text">{errors.name}</p>
+          </div>
           <div className="form-group">
             <label htmlFor="email">Логин:</label>
             <input
@@ -143,18 +176,9 @@ class RegistrationForm extends React.Component {
             <p className="text-danger error-text">{errors.password}</p>
           </div>
           <div className="form-group">
-            <label htmlFor="name">Имя:</label>
-            <input
-              type="text"
-              className="form-control"
-              name="name"
-              id="name"
-              value={user.name}
-              placeholder="Укажите свое имя"
-              onChange={this.handleChange}
-              onBlur={this.handleBlur}
-            />
-            <p className="text-danger error-text">{errors.name}</p>
+            <label htmlFor="avatar">Выберите аватар:</label>
+            <input type="file" id="avatar" onChange={this.handleChangeAvatar} />
+            <p className="text-danger error-text">{errors.avatar}</p>
           </div>
           <p className="text-danger error-text">{firebaseError}</p>
           <div className="form-group text-center">

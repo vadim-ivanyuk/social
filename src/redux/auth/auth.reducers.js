@@ -27,6 +27,7 @@ export default function authReducer(state = initialState, action) {
           email: action.payload.email,
           password: action.payload.password,
           name: action.payload.name,
+          avatar: action.payload.avatar,
         },
       };
     case types.LOGOUT:
