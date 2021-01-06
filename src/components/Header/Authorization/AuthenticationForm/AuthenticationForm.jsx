@@ -3,7 +3,7 @@ import firebase from "firebase/app";
 import "firebase/database";
 import "firebase/auth";
 import { cookies } from "../../../../utils/cookies";
-import { withFirebaseDb } from "../../../../hoc/withFirebaseDb.jsx";
+import { withFirebase } from "../../../../hoc/withFirebase.jsx";
 import { AuthenticationFormModal } from "./AuthenticationFormModal.jsx";
 
 const firebaseDb = firebase.database();
@@ -96,4 +96,4 @@ const AuthenticationForm = (props) => {
   );
 };
 
-export default withFirebaseDb(AuthenticationForm);
+export default withFirebase(AuthenticationForm);

@@ -2,10 +2,12 @@ import React from "react";
 import firebase from "firebase/app";
 import "firebase/database";
 import "firebase/auth";
+import "firebase/storage";
 import { cookies } from "../../../../utils/cookies";
-import { withFirebaseDb } from "../../../../hoc/withFirebaseDb.jsx";
+import { withFirebase } from "../../../../hoc/withFirebase.jsx";
 
 const firebaseDb = firebase.database();
+const storageRef = firebase.storage().ref();
 
 class RegistrationForm extends React.Component {
   constructor() {
@@ -40,14 +42,28 @@ class RegistrationForm extends React.Component {
 
   handleChangeAvatar = (e) => {
     const reader = new FileReader();
+    const name = e.target.files[0].name;
 
     reader.onload = (e) => {
-      this.setState((prevState) => ({
-        user: {
-          ...prevState.user,
-          avatar: e.target.result,
-        },
-      }));
+      storageRef
+        .child(name)
+        .putString(e.target.result, "data_url", { contentType: "image/jpg" })
+        .then(() => {
+          this.setState((prevState) => ({
+            user: {
+              ...prevState.user,
+              avatar: name,
+            },
+          }));
+        })
+        .catch((error) => {
+          this.setState((prevState) => ({
+            errors: {
+              ...prevState.errors,
+              avatar: error,
+            },
+          }));
+        });
     };
 
     reader.readAsDataURL(e.target.files[0]);
@@ -55,16 +71,16 @@ class RegistrationForm extends React.Component {
 
   validateFields = () => {
     const errors = {};
-    const { email, password, name, avatar } = this.state.user;
+    const { name, email, password, avatar } = this.state.user;
 
+    if (name.length < 2) {
+      errors.name = "Укажите имя, минимум 5 значений";
+    }
     if (email.length < 5) {
       errors.email = "Укажите логин, в формате primer@gmail.com";
     }
     if (password.length < 6) {
       errors.password = "Укажите пароль, минимум 6 зачений";
-    }
-    if (name.length < 5) {
-      errors.name = "Укажите имя, минимум 5 значений";
     }
     if (avatar === null) {
       errors.avatar = "Выберите аватар";
@@ -196,4 +212,4 @@ class RegistrationForm extends React.Component {
   }
 }
 
-export default withFirebaseDb(RegistrationForm);
+export default withFirebase(RegistrationForm);

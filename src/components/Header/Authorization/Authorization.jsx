@@ -3,7 +3,7 @@ import { Modal, ModalBody } from "reactstrap";
 import AuthenticationForm from "./AuthenticationForm/AuthenticationForm.jsx";
 import RegistrationForm from "./RegistrationForm/RegistrationForm.jsx";
 
-export const Authentication = (props) => {
+export const Authorization = (props) => {
   const toggleAuthenticationModal = () => {
     const { auth, authActions } = props;
     authActions.toggleAuthenticationForm(!auth.showAuthenticationForm);
