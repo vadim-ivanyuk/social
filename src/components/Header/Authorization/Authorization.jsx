@@ -16,7 +16,7 @@ export const Authorization = (props) => {
 
   const { auth, authActions } = props;
   return (
-    <>
+    <div className="col-sm-4 d-flex align-items-center justify-content-end">
       <div className="col-sm-4">
         <button
           type="button"
@@ -51,6 +51,6 @@ export const Authorization = (props) => {
           <RegistrationForm auth={auth} authActions={authActions} />
         </ModalBody>
       </Modal>
-    </>
+    </div>
   );
 };

@@ -43,19 +43,18 @@ class RegistrationForm extends React.Component {
   handleChangeAvatar = (e) => {
     const reader = new FileReader();
     const name = e.target.files[0].name;
+    this.setState((prevState) => ({
+      user: {
+        ...prevState.user,
+        avatar: name,
+      },
+    }));
 
     reader.onload = (e) => {
       storageRef
         .child(name)
         .putString(e.target.result, "data_url", { contentType: "image/jpg" })
-        .then(() => {
-          this.setState((prevState) => ({
-            user: {
-              ...prevState.user,
-              avatar: name,
-            },
-          }));
-        })
+        .then(() => {})
         .catch((error) => {
           this.setState((prevState) => ({
             errors: {
@@ -125,7 +124,6 @@ class RegistrationForm extends React.Component {
       .then((data) => {
         authActions.toggleRegistrationForm(false);
         authActions.updateUser(user);
-        console.log(user.avatar);
         firebaseDb
           .ref("users")
           .child(data.user.uid)
@@ -193,7 +191,12 @@ class RegistrationForm extends React.Component {
           </div>
           <div className="form-group">
             <label htmlFor="avatar">Выберите аватар:</label>
-            <input type="file" id="avatar" onChange={this.handleChangeAvatar} />
+            <input
+              type="file"
+              id="avatar"
+              name="avatar"
+              onChange={this.handleChangeAvatar}
+            />
             <p className="text-danger error-text">{errors.avatar}</p>
           </div>
           <p className="text-danger error-text">{firebaseError}</p>

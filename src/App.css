@@ -195,3 +195,37 @@ button.custom-btn-light {
     font-size: 19px;
     line-height: 28px;
 }
+
+@media (max-width: 992px) {
+    .add-product {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .user-anchor {
+        border-left: none;
+    }
+
+    .header .social-title {
+        font-size: 57px;
+    }
+}
+
+@media (max-width: 576px) {
+    .favorite {
+        display: none;
+    }
+
+    .user-anchor__name {
+        display: none;
+    }
+
+    .header .social-title {
+        font-size: 48px;
+    }
+
+    .MuiPaper-root::after {
+        right: 22%;
+    }
+}

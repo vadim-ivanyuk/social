@@ -37,22 +37,29 @@ const User = (props) => {
   const open = Boolean(showUserModal);
 
   return (
-    <>
-      <div className="mr-3 cursor-pointer favorite">
-        <FavoriteIcon className="favorite__icon mr-1" />
-        <span style={{ fontSize: "14px" }}>Мои желания</span>
+    <div className="col-xl-6 col-lg-7 col-sm-7 col-4 d-flex align-items-center justify-content-around">
+      <div className="add-product">
+        <button className="btn btn-light custom-btn-light">
+          Добавить товар
+        </button>
       </div>
-      <div
-        id="UserModal"
-        className="cursor-pointer pl-3 user-anchor"
-        onClick={handleClick}
-      >
-        <img
-          src={avatar ? avatar : defaultAvatar}
-          className="user-anchor__img"
-          alt=""
-        />
-        <span className="ml-2 user-anchor__name">{user.name}</span>
+      <div className="d-flex align-items-center">
+        <div className="mr-0 mr-md-3 cursor-pointer favorite">
+          <FavoriteIcon className="favorite__icon mr-1" />
+          <span style={{ fontSize: "14px" }}>Мои желания</span>
+        </div>
+        <div
+          id="UserModal"
+          className="cursor-pointer pl-0 pl-sm-3 user-anchor"
+          onClick={handleClick}
+        >
+          <img
+            src={avatar ? avatar : defaultAvatar}
+            className="user-anchor__img p-0"
+            alt=""
+          />
+          <span className="ml-2 user-anchor__name">{user.name}</span>
+        </div>
       </div>
       <Popover
         id="UserModal"
@@ -81,7 +88,7 @@ const User = (props) => {
           Выйти
         </Typography>
       </Popover>
-    </>
+    </div>
   );
 };
 
