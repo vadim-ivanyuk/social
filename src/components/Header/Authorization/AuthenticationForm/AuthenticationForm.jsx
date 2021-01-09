@@ -42,11 +42,11 @@ const AuthenticationForm = (props) => {
 
   const handleBlur = (e) => {
     const { name } = e.target;
-    const errors = validateFields();
-    const error = errors[name];
+    const updatedErrors = validateFields();
+    const error = updatedErrors[name];
 
-    if (Object.keys(errors).length > 0) {
-      updateErrors({ [name]: error });
+    if (Object.keys(updatedErrors).length > 0) {
+      updateErrors({ ...errors, [name]: error });
     }
   };
 

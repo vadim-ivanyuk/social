@@ -1,4 +1,5 @@
 import React from "react";
+import { Field } from "../Fields/Field.jsx";
 
 export const AuthenticationFormModal = (props) => {
   const {
@@ -13,34 +14,26 @@ export const AuthenticationFormModal = (props) => {
     <div className="w-100 d-flex justify-content-center align-items-center">
       <form className="col-11 registration-form" onSubmit={onSubmit}>
         <h3 className="text-center mb-2 mt-2 form-title">Авторизация</h3>
-        <div className="form-group">
-          <label htmlFor="email">Логин:</label>
-          <input
-            type="email"
-            className="form-control"
-            name="email"
-            id="email"
-            value={user.email}
-            placeholder="Введите email"
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <p className="text-danger error-text">{errors.email}</p>
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Пароль:</label>
-          <input
-            type="password"
-            className="form-control"
-            name="password"
-            id="password"
-            value={user.password}
-            placeholder="Введите пароль"
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <p className="text-danger error-text">{errors.password}</p>
-        </div>
+        <Field
+          type="email"
+          id="email"
+          label="Логин"
+          placeholder="Введите логин"
+          value={user.email}
+          handleChange={handleChange}
+          handleBlur={handleBlur}
+          error={errors.email}
+        />
+        <Field
+          type="password"
+          id="password"
+          label="Пароль"
+          placeholder="Введите пароль"
+          value={user.password}
+          handleChange={handleChange}
+          handleBlur={handleBlur}
+          error={errors.password}
+        />
         <p className="text-danger error-text">{firebaseError}</p>
         <div className="form-group text-center">
           <button

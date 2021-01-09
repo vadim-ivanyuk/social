@@ -1,9 +1,10 @@
 import React from "react";
 import { Modal, ModalBody } from "reactstrap";
+import { withAuth } from "../../../hoc/withAuth.jsx";
 import AuthenticationForm from "./AuthenticationForm/AuthenticationForm.jsx";
 import RegistrationForm from "./RegistrationForm/RegistrationForm.jsx";
 
-export const Authorization = (props) => {
+const Authorization = (props) => {
   const toggleAuthenticationModal = () => {
     const { auth, authActions } = props;
     authActions.toggleAuthenticationForm(!auth.showAuthenticationForm);
@@ -54,3 +55,5 @@ export const Authorization = (props) => {
     </div>
   );
 };
+
+export default withAuth(Authorization);
