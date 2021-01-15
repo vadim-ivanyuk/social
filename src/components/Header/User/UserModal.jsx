@@ -32,6 +32,7 @@ export const UserModal = (props) => {
         <span className="user-modal__subname">Смотреть профиль</span>
       </Typography>
       <Typography className="user-modal__favorite">Мои желания</Typography>
+      <Typography className="user-modal__favorite">Мои товары</Typography>
       <Typography
         onClick={() => authActions.onLogOut()}
         className="user-modal__log-out"

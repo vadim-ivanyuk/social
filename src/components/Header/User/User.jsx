@@ -12,6 +12,7 @@ const firebaseStorageRef = firebase.storage().ref();
 const User = (props) => {
   const [showUserModal, toggleUserModal] = useState(null);
   const [avatar, setAvatar] = useState(null);
+
   const {
     auth: { user },
     authActions,
@@ -32,11 +33,6 @@ const User = (props) => {
 
   return (
     <div className="col-xl-6 col-lg-7 col-sm-7 col-4 d-flex align-items-center justify-content-end">
-      {/* <div className="add-product">
-        <button className="btn btn-light custom-btn-light">
-          Добавить товар
-        </button>
-      </div> */}
       <div className="d-flex align-items-center">
         <div className="mr-0 mr-md-3 cursor-pointer favorite">
           <FavoriteIcon className="favorite__icon mr-1" />

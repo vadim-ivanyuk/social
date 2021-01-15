@@ -204,13 +204,10 @@ button.custom-btn-light {
     line-height: 28px;
 }
 
-.popular {
-    background: rgba(0, 0, 0, 0.1);
-}
-
 .popular-products {
-    font-family: revert;
-    font-size: 32px;
+    margin-bottom: 0;
+    font-size: 28px;
+    font-weight: 100;
 }
 
 .swiper-pagination-bullet-active {
@@ -223,12 +220,30 @@ button.custom-btn-light {
     min-height: 420px;
 }
 
+.product-card__img {
+    position: relative;
+}
+
 .product-card__img .img {
     max-width: 100%;
     height: 235px;
     max-height: 300px;
     object-fit: cover;
-    opacity: 0.9;
+}
+
+.product-card__img .favorite-icon {
+    position: absolute;
+    top: 0px;
+    right: 15px;
+    font-size: 25px;
+}
+
+.product-card__img .favorite-icon__active {
+    color: rgb(190, 54, 54);
+}
+
+.product-card__img .favorite-icon__disabled {
+    color: rgba(0, 0, 0, 0.26);
 }
 
 .product-card__title .title {

@@ -16,29 +16,35 @@ const RegistrationForm = (props) => {
     email: "",
     password: "",
     avatar: null,
-    avatarDisabled: false,
   });
+  const [avatarDisabled, setAvatarDisabled] = useState(false);
   const [errors, setErrors] = useState({});
   const [firebaseError, setFirebaseError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setUser({ ...user, [name]: value });
-    setErrors({ ...errors, [name]: null, base: null });
+    setUser((prevUser) => ({ ...prevUser, [name]: value }));
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: null, base: null }));
   };
 
   const updateAvatar = (e) => {
     const reader = new FileReader();
     const name = e.target.files[0].name;
-    setUser({ ...user, avatar: name, avatarDisabled: true });
+
+    setUser((prevUser) => ({
+      ...prevUser,
+      avatar: name,
+    }));
+
+    setAvatarDisabled(true);
 
     reader.onload = (e) => {
       storageRef
         .child(name)
         .putString(e.target.result, "data_url", { contentType: "image/jpg" })
         .catch((error) => {
-          setErrors({ ...errors, avatar: error });
+          setErrors((prevErrors) => ({ ...prevErrors, avatar: error }));
         });
     };
 
@@ -47,11 +53,11 @@ const RegistrationForm = (props) => {
 
   const handleBlur = (e) => {
     const { name } = e.target;
-    const updatedErrors = validateFields();
-    const error = updatedErrors[name];
+    const errors = validateFields();
+    const error = errors[name];
 
-    if (Object.keys(updatedErrors).length > 0) {
-      setErrors({ ...errors, [name]: error });
+    if (Object.keys(errors).length > 0) {
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
     }
   };
 
@@ -76,18 +82,17 @@ const RegistrationForm = (props) => {
 
   const createAccount = () => {
     const { authActions } = props;
-    const { avatar, email, name, password } = user;
 
     firebase
       .auth()
-      .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(user.email, user.password)
       .then((data) => {
         authActions.toggleRegistrationForm(false);
         authActions.updateUser(user);
         firebaseDb
           .ref("users")
           .child(data.user.uid)
-          .set({ avatar, email, name, password });
+          .set({ ...user });
         cookies.set("user_id", data.user.uid, {
           path: "/",
           maxAge: 2592000,
@@ -113,6 +118,7 @@ const RegistrationForm = (props) => {
     <div className="w-100 d-flex justify-content-center align-items-center">
       <RegistrationFormModal
         user={user}
+        avatarDisabled={avatarDisabled}
         errors={errors}
         firebaseError={firebaseError}
         handleChange={handleChange}

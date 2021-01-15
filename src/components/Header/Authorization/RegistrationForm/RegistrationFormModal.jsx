@@ -5,6 +5,7 @@ import { FieldAvatar } from "../Fields/FieldAvatar.jsx";
 export const RegistrationFormModal = (props) => {
   const {
     user,
+    avatarDisabled,
     errors,
     firebaseError,
     handleChange,
@@ -51,7 +52,7 @@ export const RegistrationFormModal = (props) => {
       />
       <FieldAvatar
         updateAvatar={updateAvatar}
-        avatarDisabled={user.avatarDisabled}
+        avatarDisabled={avatarDisabled}
         error={errors.avatar}
       />
       <p className="text-danger error-text">{firebaseError}</p>

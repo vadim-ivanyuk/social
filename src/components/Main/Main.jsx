@@ -1,6 +1,7 @@
 import React from "react";
 import SwiperCore, { Pagination, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Link } from "react-router-dom";
 import { withAuth } from "../../hoc/withAuth.jsx";
 import { withFirebase } from "../../hoc/withFirebase.jsx";
 import { ProductCard } from "./Products/ProductCard.jsx";
@@ -22,6 +23,13 @@ const Main = () => {
           <div className="col-12 col-sm-10 main__social-text pt-3 text-sm-left text-center">
             Мы работаем, чтобы у нас вы смогли найти абсолютно всё.
           </div>
+          <div className="col-12">
+            <Link to="/create-product/">
+              <button className="btn btn-light custom-btn-light mt-3">
+                Добавить товар
+              </button>
+            </Link>
+          </div>
         </div>
         <div className="popular col-sm-6 col-12 mt-3">
           <div className="col-12 mt-2 mt-sm-4 pt-sm-1">
@@ -29,7 +37,7 @@ const Main = () => {
               Популярные товары
             </h2>
           </div>
-          <div className="mt-sm-4">
+          <div className="mt-sm-1">
             <Swiper
               spaceBetween={0}
               slidesPerView={window.innerWidth > 1053 ? 2 : 1}

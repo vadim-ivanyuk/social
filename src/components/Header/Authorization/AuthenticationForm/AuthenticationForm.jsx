@@ -15,15 +15,17 @@ const AuthenticationForm = (props) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    updateUser({
-      ...user,
+
+    updateUser((prevUser) => ({
+      ...prevUser,
       [name]: value,
-    });
-    updateErrors({
-      ...errors,
+    }));
+
+    updateErrors((prevErrors) => ({
+      ...prevErrors,
       [name]: null,
       base: null,
-    });
+    }));
   };
 
   const validateFields = () => {
@@ -42,11 +44,11 @@ const AuthenticationForm = (props) => {
 
   const handleBlur = (e) => {
     const { name } = e.target;
-    const updatedErrors = validateFields();
-    const error = updatedErrors[name];
+    const errors = validateFields();
+    const error = errors[name];
 
-    if (Object.keys(updatedErrors).length > 0) {
-      updateErrors({ ...errors, [name]: error });
+    if (Object.keys(errors).length > 0) {
+      updateErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
     }
   };
 
