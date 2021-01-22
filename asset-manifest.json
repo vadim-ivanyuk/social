@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/social/static/css/main.8f675186.chunk.css",
-    "main.js": "/social/static/js/main.4a2926d5.chunk.js",
-    "main.js.map": "/social/static/js/main.4a2926d5.chunk.js.map",
-    "runtime-main.js": "/social/static/js/runtime-main.1badb70b.js",
-    "runtime-main.js.map": "/social/static/js/runtime-main.1badb70b.js.map",
+    "main.css": "/social/static/css/main.6b2c4b7b.chunk.css",
+    "main.js": "/social/static/js/main.dcd39342.chunk.js",
+    "main.js.map": "/social/static/js/main.dcd39342.chunk.js.map",
+    "runtime-main.js": "/social/static/js/runtime-main.b9e20e92.js",
+    "runtime-main.js.map": "/social/static/js/runtime-main.b9e20e92.js.map",
     "static/css/2.fbda91cb.chunk.css": "/social/static/css/2.fbda91cb.chunk.css",
-    "static/js/2.d3fe69ff.chunk.js": "/social/static/js/2.d3fe69ff.chunk.js",
-    "static/js/2.d3fe69ff.chunk.js.map": "/social/static/js/2.d3fe69ff.chunk.js.map",
-    "static/js/3.79180505.chunk.js": "/social/static/js/3.79180505.chunk.js",
-    "static/js/3.79180505.chunk.js.map": "/social/static/js/3.79180505.chunk.js.map",
+    "static/js/2.3b5595e7.chunk.js": "/social/static/js/2.3b5595e7.chunk.js",
+    "static/js/2.3b5595e7.chunk.js.map": "/social/static/js/2.3b5595e7.chunk.js.map",
+    "static/js/3.c30693ad.chunk.js": "/social/static/js/3.c30693ad.chunk.js",
+    "static/js/3.c30693ad.chunk.js.map": "/social/static/js/3.c30693ad.chunk.js.map",
     "index.html": "/social/index.html",
     "static/css/2.fbda91cb.chunk.css.map": "/social/static/css/2.fbda91cb.chunk.css.map",
-    "static/css/main.8f675186.chunk.css.map": "/social/static/css/main.8f675186.chunk.css.map",
-    "static/js/2.d3fe69ff.chunk.js.LICENSE.txt": "/social/static/js/2.d3fe69ff.chunk.js.LICENSE.txt",
+    "static/css/main.6b2c4b7b.chunk.css.map": "/social/static/css/main.6b2c4b7b.chunk.css.map",
+    "static/js/2.3b5595e7.chunk.js.LICENSE.txt": "/social/static/js/2.3b5595e7.chunk.js.LICENSE.txt",
     "static/media/fon.6fc09ea9.jpg": "/social/static/media/fon.6fc09ea9.jpg",
     "static/media/jordan.41408b16.jpg": "/social/static/media/jordan.41408b16.jpg",
     "static/media/russell-hobbs.1e643348.jpg": "/social/static/media/russell-hobbs.1e643348.jpg",
@@ -21,10 +21,10 @@
     "static/media/zaryadka.66f38e80.jpg": "/social/static/media/zaryadka.66f38e80.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.1badb70b.js",
+    "static/js/runtime-main.b9e20e92.js",
     "static/css/2.fbda91cb.chunk.css",
-    "static/js/2.d3fe69ff.chunk.js",
-    "static/css/main.8f675186.chunk.css",
-    "static/js/main.4a2926d5.chunk.js"
+    "static/js/2.3b5595e7.chunk.js",
+    "static/css/main.6b2c4b7b.chunk.css",
+    "static/js/main.dcd39342.chunk.js"
   ]
 }
