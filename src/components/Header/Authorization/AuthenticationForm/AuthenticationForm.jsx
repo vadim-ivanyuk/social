@@ -1,27 +1,28 @@
 import React, { useState } from "react";
-import firebase from "firebase/app";
-import "firebase/database";
-import "firebase/auth";
+import { useDispatch } from "react-redux";
 import { cookies } from "../../../../utils/cookies";
-import { withFirebase } from "../../../../hoc/withFirebase.jsx";
 import { AuthenticationFormModal } from "./AuthenticationFormModal.jsx";
+import { FIREBASE_DB, FIREBASE } from "../../../../utils/apies";
+import {
+  updateUser,
+  toggleAuthenticationForm,
+} from "../../../../redux/auth/auth.actions";
 
-const firebaseDb = firebase.database();
-
-const AuthenticationForm = (props) => {
-  const [user, updateUser] = useState({ email: "", password: "" });
-  const [errors, updateErrors] = useState({});
-  const [firebaseError, updateFirebaseError] = useState("");
+export const AuthenticationForm = () => {
+  const [user, setUser] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({});
+  const [firebaseError, setFirebaseError] = useState("");
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    updateUser((prevUser) => ({
+    setUser((prevUser) => ({
       ...prevUser,
       [name]: value,
     }));
 
-    updateErrors((prevErrors) => ({
+    setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: null,
       base: null,
@@ -48,7 +49,7 @@ const AuthenticationForm = (props) => {
     const error = errors[name];
 
     if (Object.keys(errors).length > 0) {
-      updateErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
+      setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
     }
   };
 
@@ -58,31 +59,27 @@ const AuthenticationForm = (props) => {
     const errors = validateFields();
 
     if (Object.keys(errors).length > 0) {
-      updateErrors({ ...errors });
+      setErrors({ ...errors });
     } else {
       signIn();
     }
   };
 
   const signIn = () => {
-    const { authActions } = props;
-
-    firebase
-      .auth()
+    FIREBASE.auth()
       .signInWithEmailAndPassword(user.email, user.password)
       .then((data) => {
-        authActions.toggleAuthenticationForm(false);
-        firebaseDb
-          .ref("users")
+        dispatch(toggleAuthenticationForm(false));
+        FIREBASE_DB.ref("users")
           .child(data.user.uid)
-          .on("value", (elem) => authActions.updateUser(elem.val()));
+          .on("value", (elem) => dispatch(updateUser(JSON.parse(elem.val()))));
         cookies.set("user_id", data.user.uid, {
           path: "/",
           maxAge: 2592000,
         });
       })
       .catch((error) => {
-        updateFirebaseError(error.message);
+        setFirebaseError(error.message);
       });
   };
 
@@ -97,5 +94,3 @@ const AuthenticationForm = (props) => {
     />
   );
 };
-
-export default withFirebase(AuthenticationForm);

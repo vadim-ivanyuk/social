@@ -1,6 +1,6 @@
 import React from "react";
-import { Field } from "../Fields/Field.jsx";
-import { FieldAvatar } from "../Fields/FieldAvatar.jsx";
+import { Field } from "../../../Fields/Field.jsx";
+import { FieldAvatar } from "../../../Fields/FieldAvatar.jsx";
 
 export const RegistrationFormModal = (props) => {
   const {

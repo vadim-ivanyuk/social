@@ -1,15 +1,19 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Popover from "@material-ui/core/Popover";
 import Typography from "@material-ui/core/Typography";
+import { onLogOut } from "../../../redux/auth/auth.actions";
 
 export const UserModal = (props) => {
-  const { showUserModal, toggleUserModal, authActions, user } = props;
+  const { showUserModal, toggleUserModal } = props;
+  const auth = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
 
   const handleClose = () => {
     toggleUserModal(null);
   };
 
-  const open = Boolean(showUserModal);
+  const open = !!showUserModal;
 
   return (
     <Popover
@@ -28,13 +32,13 @@ export const UserModal = (props) => {
       className="user-modal"
     >
       <Typography className="user-modal__name">
-        {user.name}{" "}
+        {auth.user.name}
         <span className="user-modal__subname">Смотреть профиль</span>
       </Typography>
       <Typography className="user-modal__favorite">Мои желания</Typography>
       <Typography className="user-modal__favorite">Мои товары</Typography>
       <Typography
-        onClick={() => authActions.onLogOut()}
+        onClick={() => dispatch(onLogOut())}
         className="user-modal__log-out"
       >
         Выйти

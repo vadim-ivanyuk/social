@@ -1,6 +1,6 @@
 import React from "react";
 
-export const CreateProductPage = (props) => {
+export const CreateProduct = () => {
   const onSubmit = (e) => {
     e.preventDefault();
   };

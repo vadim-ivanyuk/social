@@ -1,31 +1,22 @@
 import React, { useState, useEffect } from "react";
-import firebase from "firebase/app";
-import "firebase/storage";
+import { useSelector } from "react-redux";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import defaultAvatar from "../../../images/social.svg";
-import { withAuth } from "../../../hoc/withAuth.jsx";
-import { withFirebase } from "../../../hoc/withFirebase.jsx";
 import { UserModal } from "./UserModal.jsx";
+import { FIREBASE_STORAGE_REF } from "../../../utils/apies";
 
-const firebaseStorageRef = firebase.storage().ref();
-
-const User = (props) => {
+export const User = () => {
   const [showUserModal, toggleUserModal] = useState(null);
   const [avatar, setAvatar] = useState(null);
-
-  const {
-    auth: { user },
-    authActions,
-  } = props;
+  const auth = useSelector((store) => store.auth);
 
   useEffect(() => {
-    firebaseStorageRef
-      .child(user.avatar)
+    FIREBASE_STORAGE_REF.child(auth.user.avatar)
       .getDownloadURL()
       .then((avatar) => {
         setAvatar(avatar);
       });
-  }, [user.avatar]);
+  }, [auth.user.avatar]);
 
   const handleClick = (event) => {
     toggleUserModal(event.currentTarget);
@@ -48,17 +39,13 @@ const User = (props) => {
             className="user-anchor__img p-0"
             alt=""
           />
-          <span className="user-anchor__name">{user.name}</span>
+          <span className="user-anchor__name">{auth.user.name}</span>
         </div>
         <UserModal
           showUserModal={showUserModal}
           toggleUserModal={toggleUserModal}
-          authActions={authActions}
-          user={user}
         />
       </div>
     </div>
   );
 };
-
-export default withAuth(withFirebase(User));

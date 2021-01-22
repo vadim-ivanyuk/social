@@ -1,26 +1,24 @@
 import React, { useEffect } from "react";
-import firebase from "firebase/app";
-import "firebase/database";
+import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
 import fon from "./images/fon.jpg";
-import Header from "./components/Header/Header.jsx";
-import Main from "./components/Main/Main.jsx";
-import { CreateProductPage } from "./pages/CreateProductPage.jsx";
-import { withAuth } from "./hoc/withAuth.jsx";
+import { Header } from "./components/Header/Header.jsx";
+import { Main } from "./components/pages/Main/Main.jsx";
+import { CreateProduct } from "./components/pages/CreateProduct/CreateProduct.jsx";
+import { updateUser } from "./redux/auth/auth.actions";
+import { FIREBASE_DB } from "./utils/apies";
 
-const firebaseDb = firebase.database();
-
-const App = (props) => {
-  const { auth, authActions } = props;
+export const App = () => {
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (auth.user_id) {
-      firebaseDb
-        .ref("users")
+      FIREBASE_DB.ref("users")
         .child(auth.user_id)
-        .on("value", (elem) => authActions.updateUser(elem.val()));
+        .on("value", (elem) => dispatch(updateUser(JSON.parse(elem.val()))));
     }
-  }, [auth.user_id, authActions]);
+  }, []);
 
   return (
     <BrowserRouter basename="/social/">
@@ -31,11 +29,9 @@ const App = (props) => {
         <div className="app__above-img">
           <Header />
           <Route exact path="/" component={Main} />
-          <Route path="/create-product/" component={CreateProductPage} />
+          <Route path="/create-product/" component={CreateProduct} />
         </div>
       </div>
     </BrowserRouter>
   );
 };
-
-export default withAuth(App);

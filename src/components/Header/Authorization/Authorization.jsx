@@ -1,21 +1,25 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Modal, ModalBody } from "reactstrap";
-import { withAuth } from "../../../hoc/withAuth.jsx";
-import AuthenticationForm from "./AuthenticationForm/AuthenticationForm.jsx";
-import RegistrationForm from "./RegistrationForm/RegistrationForm.jsx";
+import { AuthenticationForm } from "./AuthenticationForm/AuthenticationForm.jsx";
+import { RegistrationForm } from "./RegistrationForm/RegistrationForm.jsx";
+import {
+  toggleAuthenticationForm,
+  toggleRegistrationForm,
+} from "../../../redux/auth/auth.actions";
 
-const Authorization = (props) => {
+export const Authorization = () => {
+  const auth = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
+
   const toggleAuthenticationModal = () => {
-    const { auth, authActions } = props;
-    authActions.toggleAuthenticationForm(!auth.showAuthenticationForm);
+    dispatch(toggleAuthenticationForm(!auth.showAuthenticationForm));
   };
 
   const toggleRegistrationModal = () => {
-    const { auth, authActions } = props;
-    authActions.toggleRegistrationForm(!auth.showRegistrationForm);
+    dispatch(toggleRegistrationForm(!auth.showRegistrationForm));
   };
 
-  const { auth, authActions } = props;
   return (
     <div className="col-sm-4 d-flex align-items-center justify-content-end">
       <div className="col-sm-4">
@@ -32,7 +36,7 @@ const Authorization = (props) => {
         toggle={toggleAuthenticationModal}
       >
         <ModalBody>
-          <AuthenticationForm auth={auth} authActions={authActions} />
+          <AuthenticationForm />
         </ModalBody>
       </Modal>
       <div className="col-sm-6">
@@ -49,11 +53,9 @@ const Authorization = (props) => {
         toggle={toggleRegistrationModal}
       >
         <ModalBody>
-          <RegistrationForm auth={auth} authActions={authActions} />
+          <RegistrationForm />
         </ModalBody>
       </Modal>
     </div>
   );
 };
-
-export default withAuth(Authorization);

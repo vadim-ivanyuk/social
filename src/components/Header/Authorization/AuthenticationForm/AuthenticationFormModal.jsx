@@ -1,5 +1,5 @@
 import React from "react";
-import { Field } from "../Fields/Field.jsx";
+import { Field } from "../../../Fields/Field.jsx";
 
 export const AuthenticationFormModal = (props) => {
   const {

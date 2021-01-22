@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import firebase from "firebase/app";
-import "firebase/database";
-import "firebase/auth";
-import "firebase/storage";
+import { useDispatch } from "react-redux";
 import { cookies } from "../../../../utils/cookies";
-import { withFirebase } from "../../../../hoc/withFirebase.jsx";
 import { RegistrationFormModal } from "./RegistrationFormModal.jsx";
+import {
+  FIREBASE_DB,
+  FIREBASE_STORAGE_REF,
+  FIREBASE,
+} from "../../../../utils/apies";
+import {
+  toggleRegistrationForm,
+  updateUser,
+} from "../../../../redux/auth/auth.actions";
 
-const firebaseDb = firebase.database();
-const storageRef = firebase.storage().ref();
-
-const RegistrationForm = (props) => {
+export const RegistrationForm = () => {
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -20,6 +22,7 @@ const RegistrationForm = (props) => {
   const [avatarDisabled, setAvatarDisabled] = useState(false);
   const [errors, setErrors] = useState({});
   const [firebaseError, setFirebaseError] = useState("");
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,8 +43,7 @@ const RegistrationForm = (props) => {
     setAvatarDisabled(true);
 
     reader.onload = (e) => {
-      storageRef
-        .child(name)
+      FIREBASE_STORAGE_REF.child(name)
         .putString(e.target.result, "data_url", { contentType: "image/jpg" })
         .catch((error) => {
           setErrors((prevErrors) => ({ ...prevErrors, avatar: error }));
@@ -81,18 +83,14 @@ const RegistrationForm = (props) => {
   };
 
   const createAccount = () => {
-    const { authActions } = props;
-
-    firebase
-      .auth()
+    FIREBASE.auth()
       .createUserWithEmailAndPassword(user.email, user.password)
       .then((data) => {
-        authActions.toggleRegistrationForm(false);
-        authActions.updateUser(user);
-        firebaseDb
-          .ref("users")
+        dispatch(toggleRegistrationForm(false));
+        dispatch(updateUser(user));
+        FIREBASE_DB.ref("users")
           .child(data.user.uid)
-          .set({ ...user });
+          .set(JSON.stringify({ ...user }));
         cookies.set("user_id", data.user.uid, {
           path: "/",
           maxAge: 2592000,
@@ -129,5 +127,3 @@ const RegistrationForm = (props) => {
     </div>
   );
 };
-
-export default withFirebase(RegistrationForm);
